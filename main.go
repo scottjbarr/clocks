@@ -10,15 +10,21 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
+const (
+	defaultZones = "Australia/Sydney,Asia/Tokyo,Europe/London,America/New_York"
+
+	defaultLayout = "vertical"
+)
+
 func main() {
 	tz := ""
 	layout := ""
 
-	flag.StringVar(&tz, "tz", "", "Australia/Sydney,Asia/Tokyo,Europe/London,America/New_York")
-	flag.StringVar(&layout, "layout", "horizontal", "Layout horizontal or vertical.")
+	flag.StringVar(&tz, "tz", defaultZones, "Comma separated list of zones. e.g Australia/Sydney,AsiaTokyo")
+	flag.StringVar(&layout, "layout", defaultLayout, "Layout horizontal or vertical.")
 	flag.Parse()
 
-	if len(tz) == 0 {
+	if len(tz) == 0 || len(layout) == 0 {
 		flag.Usage()
 		os.Exit(1)
 	}
